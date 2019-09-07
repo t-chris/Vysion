@@ -24,14 +24,21 @@ var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var video = document.getElementById('video');
 
+// Converts canvas to an image
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL("image/png");
+	return image;
+}
+
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
+    console.log(convertCanvasToImage(canvas));
+    context.drawImage(video, 0, 0, 640, 480);
     const worker = new Tesseract.TesseractWorker();
-
-	context.drawImage(video, 0, 0, 640, 480);
     worker
         .recognize(
-            video,
+            convertCanvasToImage(canvas),
             'eng'
         )
         .progress((p) => {
