@@ -17,8 +17,9 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
-
-
+app.get('/app', async (req, res) => {
+    res.render('app');
+})
 
 const PORT = process.env.PORT || 5000; 
 
